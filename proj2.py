@@ -30,6 +30,54 @@ def results(small, medium, large, case):
     print("For N = 10000, it takes ", large, " seconds")
 
 
+def bubblesort(scenario):
+    print("bubblesort")
+    
+    
+def quicksort(scenario):
+    print("quicksort")
+    
+    
+def mergesort(scenario):
+    print("mergesort")
+    
+def othersort(scenario):
+    print("othersort")
+
+def fileprint(times):
+    print("fileprint")
+    
+    
+def generateworstcase(algorithm):
+    print("worstcase")
+    
+    
+    
+def generateaveragecase(algorithm):
+    print("averagecase")
+    
+    
+def generatebestcase(algorithm):
+    print("bestcase")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def main():
 
     # If this is gibberish, I do apologize. 
