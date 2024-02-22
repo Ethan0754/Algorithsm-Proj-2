@@ -1,6 +1,16 @@
-###Ethan Pendergraft, Thi Huynh, Hunter Henderson###
+### Ethan Pendergraft, Thi Huynh, Hunter Henderson ###
 import sys
+import random
+import time
 
+def generateList(size):
+    newList = []
+    
+    for i in range(size):
+        x = random.randint(1, 10)
+        newList.append(x)
+    
+    return newList
 
 def sorting():
     print("Select the sorting algorithm you want to test.")
@@ -21,6 +31,7 @@ def case(algorithm):
     print("3. Worst Case")
     print("4. Exit", algorithm, " test")
     print("Select the case (1-4):")
+    
 
 
 def results(small, medium, large, case):
@@ -30,8 +41,13 @@ def results(small, medium, large, case):
     print("For N = 10000, it takes ", large, " seconds")
 
 
-def bubblesort(scenario):
-    print("bubblesort")
+def bubblesort(myList):
+    for i in range (len(myList) - 1):
+        for j in range (len(myList) - i -1):
+            if myList[j] > myList [j + 1]:
+                myList[j], myList [j + 1] =\
+                    myList[j + 1], myList[j]
+    return myList
     
     
 def quicksort(scenario):
@@ -48,33 +64,52 @@ def fileprint(times):
     print("fileprint")
     
     
-def generateworstcase(algorithm):
+def genBestBubble(algorithm):
     print("worstcase")
+    newList = []
     
+    for i in range (100):
+        newList.append(i)
     
+    start = time.time()
+    bubblesort(newList)
+    end = time.time()
+    n_hundred = end - start
+    n_thou = 0
+    n_tenthou = 0
     
-def generateaveragecase(algorithm):
-    print("averagecase")
+    results(n_hundred, n_thou, n_tenthou, "Best Case")
+        
+    
+def genAvgBubble():
+    
+    start = time.time()
+    newList = generateList(100)
+    bubblesort(newList)
+    end = time.time()
+    n_hundred = end - start
+    
+    start = time.time()
+    newList = generateList(1000)
+    bubblesort(newList)
+    end = time.time()
+    n_thou = end - start
+        
+    start = time.time()
+    newList = generateList(10000)
+    bubblesort(newList)
+    end = time.time()
+    n_tenthou = end - start
+    
+    small = n_hundred
+    medium = n_thou
+    large = n_tenthou
+    
+    results(small, medium, large, "average")
     
     
 def generatebestcase(algorithm):
     print("bestcase")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -118,10 +153,7 @@ def main():
                     print("Do you want to input another N (Y/N)? ")
                     again = input()
             elif(choice == "2"):
-                small = 0
-                medium = 0
-                large = 0
-                results(small, medium, large, "average")
+                genAvgBubble()
                 print("Do you want to input another N (Y/N)? ")
                 again = input()
                 while(again == "Y" or again == "y"):
