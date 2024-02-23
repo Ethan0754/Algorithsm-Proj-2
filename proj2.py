@@ -51,13 +51,13 @@ def bubblesort(myList):
     return myList
     
 
-def merge_sort(m):
+def merge_sort(myList):
     
-    if len(m) <= 1:
-        return m
-    middle = len(m) // 2
-    left = m[:middle]
-    right = m[middle:]
+    if len(myList) <= 1:
+        return myList
+    middle = len(myList) // 2
+    left = myList[:middle]
+    right = myList[middle:]
     left = merge_sort(left)
     right = merge_sort(right)
     
@@ -186,30 +186,31 @@ def genBestMerge():
     newlist2 = []
     newlist3 = []
     
-    for i in range (100):
+    for i in range (1000):
         newlist.append(i)
     
     start = time.time()
     mSort_hund = merge_sort(newlist)
     end = time.time()
-    small = start - end
+    small = float (end - start)
     
-    for i in range (1000):
+    for i in range (10000):
         newlist2.append(i)
     
     start = time.time()
     mSort_thou = merge_sort(newlist)
     end = time.time()
-    medium = start - end
+    medium = end - start
 
     
-    for i in range (10000):
+    for i in range (100000):
         newlist3.append(i)
     
     start = time.time()
     mSort_tenthou = merge_sort(newlist)
-    large = start - end
     end = time.time()
+    large = end - start
+
     
     results(small, medium, large, "Best")
     
@@ -225,7 +226,7 @@ def genWorstMerge():
     start = time.time()
     mSort_hund = merge_sort(newlist)
     end = time.time()
-    small = start - end
+    small = end - start
     
     for i in range (1000):
         newlist2.append(i)
@@ -234,7 +235,7 @@ def genWorstMerge():
     start = time.time()
     mSort_thou = merge_sort(newlist)
     end = time.time()
-    medium = start - end
+    medium = float(end - start)
 
     
     for i in range (10000):
@@ -243,8 +244,8 @@ def genWorstMerge():
     
     start = time.time()
     mSort_tenthou = merge_sort(newlist)
-    large = start - end
     end = time.time()
+    large = end - start
     
     results(small, medium, large, "Best")
     
