@@ -94,7 +94,7 @@ def genBestBubble():
     newList2 = []
     newList3 = []
     
-    ##Here is what I changed##
+  ##Here is what I changed##
     newList = generateList(100)
     merge_sort(newList)
     newList2 = generateList(1000)
@@ -102,13 +102,14 @@ def genBestBubble():
     newList3 = generateList(10000)
     merge_sort(newList3)
     ##----------------------##
+
     
     start = time.time()
     bubblesort(newList)
     end = time.time()
     n_hundred = end - start
     
- 
+
        
     start = time.time()
     bubblesort(newList2)
@@ -116,7 +117,6 @@ def genBestBubble():
     n_thou = end - start
     
 
-       
     start = time.time()
     bubblesort(newList3)
     end = time.time()
@@ -155,8 +155,7 @@ def genWorstBubble():
     newList2 = []
     newList3 = []
 
-
-##Here is what I changed##
+    ##Here is what I changed##
     newList = generateList(100)
     merge_sort(newList)
     newList2 = generateList(1000)
@@ -168,10 +167,12 @@ def genWorstBubble():
     newList3.reverse()
 ##---------------------##
 
+
     start = time.time()
     bubblesort(newList)
     end = time.time()
     n_hundred = end - start
+
 
 
     start = time.time()
@@ -179,6 +180,7 @@ def genWorstBubble():
     end = time.time()
     n_thou = end - start
 
+   
 
     start = time.time()
     bubblesort(newList3)
