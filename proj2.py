@@ -50,9 +50,34 @@ def bubblesort(myList):
                     myList[j + 1], myList[j]
     return myList
     
+
+def merge_sort(m):
     
-def mergesort(scenario):
-    print("mergesort")    
+    if len(m) <= 1:
+        return m
+    middle = len(m) // 2
+    left = m[:middle]
+    right = m[middle:]
+    left = merge_sort(left)
+    right = merge_sort(right)
+    
+    return list(merge(left, right))
+
+def merge(left, right):
+    result = []
+    left_idx, right_idx = 0, 0
+    while left_idx < len(left) and right_idx < len(right):
+        if left[left_idx] <= right[right_idx]:
+            result.append(left[left_idx])
+            left_idx += 1
+        else:
+            result.append(right[right_idx])
+            right_idx += 1
+    if left_idx < len(left):
+        result.extend(left[left_idx:])
+    if right_idx < len(right):
+        result.extend(right[right_idx:])
+    return result
     
 def quicksort(myList):
     print("quicksort")
@@ -94,8 +119,7 @@ def genBestBubble():
     n_tenthou = end - start
         
     results(n_hundred, n_thou, n_tenthou, "Best")
-        
-    
+         
 def genAvgBubble():
     
     start = time.time()
@@ -126,35 +150,104 @@ def genWorstBubble():
     newList = []
     newList2 = []
     newList3 = []
-    
+
     for i in range (100):
         newList.append(i)
     newList.reverse()
-    
+
     start = time.time()
     bubblesort(newList)
     end = time.time()
     n_hundred = end - start
-    
+
     for i in range (1000):
         newList2.append(i)
     newList2.reverse()
-       
+
     start = time.time()
     bubblesort(newList2)
     end = time.time()
     n_thou = end - start
-    
+
     for i in range (10000):
         newList3.append(i)
     newList3.reverse()
-    
+
     start = time.time()
     bubblesort(newList3)
     end = time.time()
     n_tenthou = end - start
-        
+
     results(n_hundred, n_thou, n_tenthou, "Worst")
+    
+    
+def genBestMerge():
+    newlist = []
+    newlist2 = []
+    newlist3 = []
+    
+    for i in range (100):
+        newlist.append(i)
+    
+    start = time.time()
+    mSort_hund = merge_sort(newlist)
+    end = time.time()
+    small = start - end
+    
+    for i in range (1000):
+        newlist2.append(i)
+    
+    start = time.time()
+    mSort_thou = merge_sort(newlist)
+    end = time.time()
+    medium = start - end
+
+    
+    for i in range (10000):
+        newlist3.append(i)
+    
+    start = time.time()
+    mSort_tenthou = merge_sort(newlist)
+    large = start - end
+    end = time.time()
+    
+    results(small, medium, large, "Best")
+    
+def genWorstMerge():
+    newlist = []
+    newlist2 = []
+    newlist3 = []
+    
+    for i in range (100):
+        newlist.append(i)
+    newlist.reverse()
+    
+    start = time.time()
+    mSort_hund = merge_sort(newlist)
+    end = time.time()
+    small = start - end
+    
+    for i in range (1000):
+        newlist2.append(i)
+    newlist2.reverse()
+    
+    start = time.time()
+    mSort_thou = merge_sort(newlist)
+    end = time.time()
+    medium = start - end
+
+    
+    for i in range (10000):
+        newlist3.append(i)
+    newlist.reverse()
+    
+    start = time.time()
+    mSort_tenthou = merge_sort(newlist)
+    large = start - end
+    end = time.time()
+    
+    results(small, medium, large, "Best")
+    
 
         
 def sort(choice, algorithm):
@@ -163,7 +256,7 @@ def sort(choice, algorithm):
         if algorithm == '1':
             genBestBubble()
         elif algorithm == '2':
-            print('genBestmerge')
+            genBestMerge()
         elif algorithm == '2':
             print ('genbest quick')
         elif algorithm == '3':
@@ -181,11 +274,11 @@ def sort(choice, algorithm):
         if algorithm == '1':
             genWorstBubble()
         elif algorithm == '2':
-            print('gen avg merge')
+            genWorstMerge()
         elif algorithm == '2':
-            print ('gen avg quick')
+            print ('gen worst quick')
         elif algorithm == '3':
-            print ('genavg other')
+            print ('gen worst other')
             
 #------------------------------MAIN (FRONT END)-------------------------------#
 def main():
@@ -218,6 +311,7 @@ def main():
                 break
             
             sort(choice, algorithm)
+            
             print("Do you want to input another N (Y/N)? ")
             again = input()
             while(again == "Y" or again == "y"):
