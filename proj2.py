@@ -3,15 +3,7 @@ import sys
 import random
 import time
 
-def generateList(size):
-    newList = []
-    
-    for i in range(size):
-        x = random.randint(1, 10)
-        newList.append(x)
-    
-    return newList
-
+#----------------------------USER INTER FACE FUNCTIONS------------------------#
 def sorting():
     print("Select the sorting algorithm you want to test.")
     print("-------------------------")
@@ -40,6 +32,15 @@ def results(small, medium, large, case):
     print("For N = 1000, it takes ", medium, " seconds")
     print("For N = 10000, it takes ", large, " seconds")
 
+#--------------------------------SORTING FUNCTIONS----------------------------#
+def generateList(size):
+    newList = []
+    
+    for i in range(size):
+        x = random.randint(1, 10)
+        newList.append(x)
+    
+    return newList
 
 def bubblesort(myList):
     for i in range (len(myList) - 1):
@@ -50,12 +51,11 @@ def bubblesort(myList):
     return myList
     
     
-def quicksort(scenario):
-    print("quicksort")
-    
-    
 def mergesort(scenario):
-    print("mergesort")
+    print("mergesort")    
+    
+def quicksort(myList):
+    print("quicksort")
     
 def othersort(scenario):
     print("othersort")
@@ -63,10 +63,11 @@ def othersort(scenario):
 def fileprint(times):
     print("fileprint")
     
-    
-def genBestBubble(algorithm):
-    print("worstcase")
+#---------------------------RESULTS FUNCTIONS---------------------------------#
+def genBestBubble():
     newList = []
+    newList2 = []
+    newList3 = []
     
     for i in range (100):
         newList.append(i)
@@ -75,10 +76,24 @@ def genBestBubble(algorithm):
     bubblesort(newList)
     end = time.time()
     n_hundred = end - start
-    n_thou = 0
-    n_tenthou = 0
     
-    results(n_hundred, n_thou, n_tenthou, "Best Case")
+    for i in range (1000):
+        newList2.append(i)
+       
+    start = time.time()
+    bubblesort(newList2)
+    end = time.time()
+    n_thou = end - start
+    
+    for i in range (10000):
+        newList3.append(i)
+       
+    start = time.time()
+    bubblesort(newList3)
+    end = time.time()
+    n_tenthou = end - start
+        
+    results(n_hundred, n_thou, n_tenthou, "Best")
         
     
 def genAvgBubble():
@@ -105,14 +120,74 @@ def genAvgBubble():
     medium = n_thou
     large = n_tenthou
     
-    results(small, medium, large, "average")
+    results(small, medium, large, "Average")
     
+def genWorstBubble():
+    newList = []
+    newList2 = []
+    newList3 = []
     
-def generatebestcase(algorithm):
-    print("bestcase")
+    for i in range (100):
+        newList.append(i)
+    newList.reverse()
+    
+    start = time.time()
+    bubblesort(newList)
+    end = time.time()
+    n_hundred = end - start
+    
+    for i in range (1000):
+        newList2.append(i)
+    newList2.reverse()
+       
+    start = time.time()
+    bubblesort(newList2)
+    end = time.time()
+    n_thou = end - start
+    
+    for i in range (10000):
+        newList3.append(i)
+    newList3.reverse()
+    
+    start = time.time()
+    bubblesort(newList3)
+    end = time.time()
+    n_tenthou = end - start
+        
+    results(n_hundred, n_thou, n_tenthou, "Worst")
 
-
-
+        
+def sort(choice, algorithm):
+    
+    if choice == '1':
+        if algorithm == '1':
+            genBestBubble()
+        elif algorithm == '2':
+            print('genBestmerge')
+        elif algorithm == '2':
+            print ('genbest quick')
+        elif algorithm == '3':
+            print ('gen best other')
+    elif choice == '2':
+        if algorithm == '1':
+            genAvgBubble()
+        elif algorithm == '2':
+            print('gen avg merge')
+        elif algorithm == '2':
+            print ('gen avg quick')
+        elif algorithm == '3':
+            print ('genavg other')
+    elif choice == '3':
+        if algorithm == '1':
+            genWorstBubble()
+        elif algorithm == '2':
+            print('gen avg merge')
+        elif algorithm == '2':
+            print ('gen avg quick')
+        elif algorithm == '3':
+            print ('genavg other')
+            
+#------------------------------MAIN (FRONT END)-------------------------------#
 def main():
 
     # If this is gibberish, I do apologize. 
@@ -134,49 +209,24 @@ def main():
                 case("Other Sort")
             elif (algorithm == "5"):
                 print("Bye!")
-                sys.exit()  
+                sys.exit() 
                 
             choice = input()
-            if(choice == "1"):
-                # Call functions at these 0's to calculate times; small = sort(algorithm, choice, 100)
-                small = 0
-                medium = 0
-                large = 0
-                results(small, medium, large, "best")
-                print("Do you want to input another N (Y/N)? ")
+            brk_cond = int(choice)
+            
+            if brk_cond < 1 or brk_cond > 3:
+                break
+            
+            sort(choice, algorithm)
+            print("Do you want to input another N (Y/N)? ")
+            again = input()
+            while(again == "Y" or again == "y"):
+                print("What is the N? ")
+                chosenN = input()
+                time = 0  # time = sort(algorithm, choice, chosenN)
+                print("For N = ", chosenN, ", it takes ", time, " seconds")
+                print("Do you want to input another N (Y/N)? ")    
                 again = input()
-                while(again == "Y" or again == "y"):
-                    print("What is the N? ")
-                    chosenN = input()
-                    time = 0  # time = sort(algorithm, choice, chosenN)
-                    print("For N = ", chosenN, ", it takes ", time, " seconds")
-                    print("Do you want to input another N (Y/N)? ")
-                    again = input()
-            elif(choice == "2"):
-                genAvgBubble()
-                print("Do you want to input another N (Y/N)? ")
-                again = input()
-                while(again == "Y" or again == "y"):
-                    print("What is the N? ")
-                    chosenN = input()
-                    time = 0  # time = sort(algorithm, choice, chosenN)
-                    print("For N = ", chosenN, ", it takes ", time, " seconds")
-                    print("Do you want to input another N (Y/N)? ")
-                    again = input()
-            elif(choice == "3"):
-                small = 0
-                medium = 0
-                large = 0
-                results(small, medium, large, "worst")
-                print("Do you want to input another N (Y/N)? ")
-                again = input()
-                while(again == "Y" or again == "y"):
-                    print("What is the N? ")
-                    chosenN = input()
-                    time = 0  # time = sort(algorithm, choice, chosenN)
-                    print("For N = ", chosenN, ", it takes ", time, " seconds")
-                    print("Do you want to input another N (Y/N)? ")
-                    again = input()
-
+                
 
 main()
