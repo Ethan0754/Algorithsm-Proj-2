@@ -2,6 +2,7 @@
 import sys
 import random
 import time
+from datetime import datetime
 
 #----------------------------USER INTER FACE FUNCTIONS------------------------#
 def sorting():
@@ -27,10 +28,42 @@ def case(algorithm):
 
 
 def results(small, medium, large, case):
+    # The first argument is the file name that it will be writing to,
+    # and the second argument is the writing mode.
+    # Here, "a" means append, meaning it will append the written lines
+    # to the end of the file.
+    # Source: https://www.geeksforgeeks.org/reading-writing-text-files-python/
+    log_results = open("log_results.txt","a")
+    
+    # Uses imported datetime function to give the current date;
+    # eg. 2024-02-23 18:45:03.159993
+    # Source: https://www.programiz.com/python-programming/datetime/current-datetime
+    current_time = datetime.now()
+    
+    # Prints the results to the console
     print("In", case, "case,")
     print("For N = 100, it takes ", small, " seconds")
     print("For N = 1000, it takes ", medium, " seconds")
     print("For N = 10000, it takes ", large, " seconds")
+    
+    # Writes the results to the log file
+    # Here, the `write` function only takes in one argument; therefore,
+    # I wrapped all the variables as strings so that it could perform
+    # string concatenation.
+    log_results.write("Results for " + str(case) + " Case on " + str(current_time) + "\n")
+    log_results.write("---------------\n")
+    log_results.write("In " + str(case) + " case,\n")
+    log_results.write("For N = 100, it takes " + str(small) + " seconds\n")
+    log_results.write("For N = 1000, it takes " + str(medium) + " seconds\n")
+    log_results.write("For N = 10000, it takes " + str(large) + " seconds\n")
+    log_results.write("---------------\n")
+    log_results.write("End of Results for " + str(case) + " Case on " + str(current_time) + "\n")
+    log_results.write("\n\n")
+    
+    # Confirms to the user that the results have been written to the log file
+    print("The results have been logged into `log_results.txt` in the same directory as the script.")
+    
+    
 
 #--------------------------------SORTING FUNCTIONS----------------------------#
 def generateList(size):
