@@ -201,13 +201,11 @@ def genAvgBubble(small, medium, large):
     end = time.time()
     n_tenthou = end - start
     
-    small = n_hundred
-    medium = n_thou
-    large = n_tenthou
+    
     if (medium != 1000):
         return n_hundred
 
-    results(small, medium, large, "Average")
+    results(n_hundred, n_thou, n_tenthou, "Average")
     
 def genWorstBubble(small, medium, large):
     newlist = []
