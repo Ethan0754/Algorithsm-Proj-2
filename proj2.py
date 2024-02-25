@@ -11,7 +11,7 @@ def sorting():
     print("1. Bubble Sort")
     print("2. Merge Sort")
     print("3. Quick Sort")
-    print("4. Other Sort")
+    print("4. Selection Sort")
     print("5. Exit")
     print("Select a sorting algorithm (1-5):")
 
@@ -137,10 +137,14 @@ def partition(myList, start, end, case):
     return i + 1
     
 def selection_sort(myList):
-    print("othersort")
+    
+    for i in range(len(myList)):
+        least = i
+        for j in range(i+1, len(myList)):
+            if(myList[least] < myList[j]):
+                least = j
+        myList[i], myList[least] = least, myList[i]
 
-def fileprint(times):
-    print("fileprint")
     
 #---------------------------RESULTS FUNCTIONS---------------------------------#
 def genBestBubble(small, medium, large):
@@ -148,14 +152,12 @@ def genBestBubble(small, medium, large):
     newList2 = []
     newList3 = []
     
-  ##Here is what I changed##
     newList = generateList(small)
     merge_sort(newList)
     newList2 = generateList(medium)
     merge_sort(newList2)
     newList3 = generateList(large)
     merge_sort(newList3)
-    ##----------------------##
 
     
     start = time.time()
@@ -183,20 +185,20 @@ def genBestBubble(small, medium, large):
          
 def genAvgBubble(small, medium, large):
     
-    start = time.time()
     newList = generateList(small)
+    start = time.time()
     bubblesort(newList)
     end = time.time()
     n_hundred = end - start
     
-    start = time.time()
     newList = generateList(medium)
+    start = time.time()
     bubblesort(newList)
     end = time.time()
     n_thou = end - start
         
-    start = time.time()
     newList = generateList(large)
+    start = time.time()
     bubblesort(newList)
     end = time.time()
     n_tenthou = end - start
@@ -442,7 +444,101 @@ def genBestQuick(small, medium, large):
     results(first, second, third, "Best")
     
     
+def genBestSelection(small, medium, large):
+    newlist = []
+    newlist2 = []
+    newlist3 = []
     
+    newlist = generateList(small)
+    merge_sort(newlist)
+    newlist2 = generateList(medium)
+    merge_sort(newlist2)
+    newlist3 = generateList(large)
+    merge_sort(newlist3)
+    
+    start = time.time()
+    mSort_hund = selection_sort(newlist)
+    end = time.time()
+    first = end - start
+    
+    start = time.time()
+    mSort_thou = selection_sort(newlist2)
+    end = time.time()
+    second = float(end - start)
+    
+    start = time.time()
+    mSort_tenthou = selection_sort(newlist3)
+    end = time.time()
+    third = end - start
+    
+    if (medium != 1000):
+        return first
+
+    results(first, second, third, "Best")
+
+def genWorstSelection(small, medium, large):
+    newlist = []
+    newlist2 = []
+    newlist3 = []
+    
+    newlist = generateList(small)
+    merge_sort(newlist)
+    newlist2 = generateList(medium)
+    merge_sort(newlist2)
+    newlist3 = generateList(large)
+    merge_sort(newlist3)
+    newlist.reverse()
+    newlist2.reverse()
+    newlist3.reverse()
+    
+    start = time.time()
+    mSort_hund = selection_sort(newlist)
+    end = time.time()
+    first = end - start
+    
+    start = time.time()
+    mSort_thou = selection_sort(newlist2)
+    end = time.time()
+    second = float(end - start)
+    
+    start = time.time()
+    mSort_tenthou = selection_sort(newlist3)
+    end = time.time()
+    third = end - start
+    
+    if (medium != 1000):
+        return first
+
+    results(first, second, third, "Worst")
+    
+def genAvgSelection(small, medium, large):
+    newlist = []
+    newlist2 = []
+    newlist3 = []
+    
+    newlist = generateList(small)
+    newlist2 = generateList(medium)
+    newlist3 = generateList(large)
+    
+    start = time.time()
+    mSort_hund = selection_sort(newlist)
+    end = time.time()
+    first = end - start
+    
+    start = time.time()
+    mSort_thou = selection_sort(newlist2)
+    end = time.time()
+    second = float(end - start)
+    
+    start = time.time()
+    mSort_tenthou = selection_sort(newlist3)
+    end = time.time()
+    third = end - start
+    
+    if (medium != 1000):
+        return first
+
+    results(first, second, third, "Average")
 
 
 
@@ -457,25 +553,26 @@ def sort(choice, algorithm, small, medium, large):
         elif algorithm == '3':
             genBestQuick(small, medium, large)
         elif algorithm == '4':
-            print("genbest other")
+            genBestSelection(small, medium, large)
     elif choice == '2':
         if algorithm == '1':
             genAvgBubble(small, medium, large)
         elif algorithm == '2':
             genAvgMerge(small, medium, large)
         elif algorithm == '3':
-            genBestQuick(small, medium, large)
+            genAvgQuick(small, medium, large)
         elif algorithm == '4':
-            print ('genavg other')
+            genAvgSelection(small, medium, large)
     elif choice == '3':
         if algorithm == '1':
             genWorstBubble(small, medium, large)
         elif algorithm == '2':
             genWorstMerge(small, medium, large)
         elif algorithm == '3':
-            genAvgQuick(small, medium, large)
+            genWorstQuick(small, medium, large)
         elif algorithm == '4':
-            print ('gen worst other')
+            genWorstSelection(small, medium, large)
+
             
 #------------------------------MAIN (FRONT END)-------------------------------#
 def main():
@@ -496,7 +593,7 @@ def main():
             elif (algorithm == "3"):
                 case("Quick Sort")
             elif (algorithm == "4"):
-                case("Other Sort")
+                case("Selection Sort")
             elif (algorithm == "5"):
                 print("Bye!")
                 sys.exit() 
@@ -523,25 +620,25 @@ def main():
                     elif algorithm == '3':
                         time = genBestQuick(chosenN, 100, 100)
                     elif algorithm == '4':
-                        print("genbest other")
+                        time = genBestSelection(chosenN, 100, 100)
                 elif choice == '2':
                     if algorithm == '1':
                         time = genAvgBubble(chosenN, 100, 100)
                     elif algorithm == '2':
                         time = genAvgMerge(chosenN, 100, 100)
                     elif algorithm == '3':
-                        time = genBestQuick(chosenN, 100, 100)
+                        time = genAvgQuick(chosenN, 100, 100)
                     elif algorithm == '4':
-                        print ('genavg other')
+                        time = genAvgSelection(chosenN, 100, 100)
                 elif choice == '3':
                     if algorithm == '1':
                         time = genWorstBubble(chosenN, 100, 100)
                     elif algorithm == '2':
                         time = genWorstMerge(chosenN, 100, 100)
                     elif algorithm == '3':
-                        time = genAvgQuick(chosenN, 100, 100)
+                        time = genWorstQuick(chosenN, 100, 100)
                     elif algorithm == '4':
-                        print ('gen worst other')
+                        time = genWorstSelection(chosenN, 100, 100)
                 print("For N = ", chosenN, ", it takes ", time, " seconds")
                 print("Do you want to input another N (Y/N)? ")    
                 again = input()
