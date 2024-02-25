@@ -70,7 +70,7 @@ def generateList(size):
     newList = []
     
     for i in range(size):
-        x = random.randint(1, 10)
+        x = random.randint(1, 100)
         newList.append(x)
     
     return newList
@@ -148,33 +148,39 @@ def selection_sort(myList):
     
 #---------------------------RESULTS FUNCTIONS---------------------------------#
 def genBestBubble(small, medium, large):
-    newList = []
-    newList2 = []
-    newList3 = []
+  
+  ##Here is what I changed##
+    newlist = []
+    newlist2 = []
+    newlist3 = []
+
+    newlist = generateList(small)
+    bubbSmallSorted = merge_sort(newlist)
     
-    newList = generateList(small)
-    merge_sort(newList)
-    newList2 = generateList(medium)
-    merge_sort(newList2)
-    newList3 = generateList(large)
-    merge_sort(newList3)
+    newlist2 = generateList(medium)
+    bubbSmallSorted2 = merge_sort(newlist2)
+    
+    newlist3 = generateList(large)
+    bubbSmallSorted3 = merge_sort(newlist3)
+    ##----------------------##
+
 
     
     start = time.time()
-    bubblesort(newList)
+    bubblesort(bubbSmallSorted)
     end = time.time()
     n_hundred = end - start
     
 
        
     start = time.time()
-    bubblesort(newList2)
+    bubblesort(bubbSmallSorted2)
     end = time.time()
     n_thou = end - start
     
 
     start = time.time()
-    bubblesort(newList3)
+    bubblesort(bubbSmallSorted3)
     end = time.time()
     n_tenthou = end - start
     
@@ -210,39 +216,44 @@ def genAvgBubble(small, medium, large):
     results(n_hundred, n_thou, n_tenthou, "Average")
     
 def genWorstBubble(small, medium, large):
+    
     newlist = []
     newlist2 = []
     newlist3 = []
 
     newlist = generateList(small)
-    merge_sort(newlist)
+    bubbSmallSorted = merge_sort(newlist)
+    
     newlist2 = generateList(medium)
-    merge_sort(newlist2)
+    bubbSmallSorted2 = merge_sort(newlist2)
+    
     newlist3 = generateList(large)
-    merge_sort(newlist3)
-    newlist.reverse()
-    newlist2.reverse()
-    newlist3.reverse()
+    bubbSmallSorted3 = merge_sort(newlist3)
+    
+    bubbSmallSorted.reverse()
+    bubbSmallSorted2.reverse()
+    bubbSmallSorted3.reverse()
 
 
     start = time.time()
-    bubblesort(newlist)
+    bubblesort(bubbSmallSorted)
     end = time.time()
     n_hundred = end - start
 
 
 
     start = time.time()
-    bubblesort(newlist2)
+    bubblesort(bubbSmallSorted2)
     end = time.time()
     n_thou = end - start
 
    
 
     start = time.time()
-    bubblesort(newlist3)
+    bubblesort(bubbSmallSorted3)
     end = time.time()
     n_tenthou = end - start
+    
     if (medium != 1000):
         return n_hundred
 
@@ -255,24 +266,24 @@ def genBestMerge(small, medium, large):
     newlist3 = []
     
     newlist = generateList(small)
-    merge_sort(newlist)
+    mergeBest = merge_sort(newlist)
     newlist2 = generateList(medium)
-    merge_sort(newlist2)
+    mergeBest2 = merge_sort(newlist2)
     newlist3 = generateList(large)
-    merge_sort(newlist3)
+    mergeBest3 = merge_sort(newlist3)
     
     start = time.time()
-    mSort_hund = merge_sort(newlist)
+    mSort_hund = merge_sort(mergeBest)
     end = time.time()
     first = float (end - start)
     
     start = time.time()
-    mSort_thou = merge_sort(newlist2)
+    mSort_thou = merge_sort(mergeBest2)
     end = time.time()
     second = end - start
     
     start = time.time()
-    mSort_tenthou = merge_sort(newlist3)
+    mSort_tenthou = merge_sort(mergeBest3)
     end = time.time()
     third = end - start
     
@@ -288,28 +299,31 @@ def genWorstMerge(small, medium, large):
     newlist3 = []
     
     newlist = generateList(small)
-    merge_sort(newlist)
+    mergeWorst = merge_sort(newlist)
+    
     newlist2 = generateList(medium)
-    merge_sort(newlist2)
+    mergeWorst2 = merge_sort(newlist2)
+    
     newlist3 = generateList(large)
-    merge_sort(newlist3)
-    newlist.reverse()
-    newlist2.reverse()
-    newlist3.reverse()
+    mergeWorst3 = merge_sort(newlist3)
+    
+    mergeWorst.reverse()
+    mergeWorst2.reverse()
+    mergeWorst3.reverse()
     
     start = time.time()
-    mSort_hund = merge_sort(newlist)
+    merge_sort(mergeWorst)
     end = time.time()
     first = end - start
         
     start = time.time()
-    mSort_thou = merge_sort(newlist2)
+    merge_sort(mergeWorst2)
     end = time.time()
     second = float(end - start)
 
         
     start = time.time()
-    mSort_tenthou = merge_sort(newlist3)
+    merge_sort(mergeWorst3)
     end = time.time()
     third = end - start
     
@@ -335,7 +349,7 @@ def genAvgMerge(small, medium, large):
     start = time.time()
     mSort_thou = merge_sort(newlist2)
     end = time.time()
-    second = float(end - start)
+    second = (end - start)
     
     start = time.time()
     mSort_tenthou = merge_sort(newlist3)
@@ -383,24 +397,24 @@ def genWorstQuick(small, medium, large):
     newlist3 = []
     
     newlist = generateList(small)
-    merge_sort(newlist)
+    worstquick = merge_sort(newlist)
     newlist2 = generateList(medium)
-    merge_sort(newlist2)
+    worstquick2 = merge_sort(newlist2)
     newlist3 = generateList(large)
-    merge_sort(newlist3)
+    worstquick3 = merge_sort(newlist3)
     
     start = time.time()
-    mSort_hund = quick_sort(newlist, 0, small-1, "Worst")
+    mSort_hund = quick_sort(worstquick, 0, small-1, "Worst")
     end = time.time()
     first = end - start
     
     start = time.time()
-    mSort_thou = quick_sort(newlist2, 0, medium-1, "Worst")
+    mSort_thou = quick_sort(worstquick2, 0, medium-1, "Worst")
     end = time.time()
     second = float(end - start)
     
     start = time.time()
-    mSort_tenthou = quick_sort(newlist3,0, large-1, "Worst")
+    mSort_tenthou = quick_sort(worstquick3,0, large-1, "Worst")
     end = time.time()
     third = end - start
     
@@ -417,24 +431,24 @@ def genBestQuick(small, medium, large):
     newlist3 = []
     
     newlist = generateList(small)
-    merge_sort(newlist)
+    bestquick = merge_sort(newlist)
     newlist2 = generateList(medium)
-    merge_sort(newlist2)
+    bestquick2 = merge_sort(newlist2)
     newlist3 = generateList(large)
-    merge_sort(newlist3)
+    bestquick3 = merge_sort(newlist3)
     
     start = time.time()
-    mSort_hund = quick_sort(newlist, 0, small-1, "Best")
+    mSort_hund = quick_sort(bestquick, 0, small-1, "Best")
     end = time.time()
     first = end - start
     
     start = time.time()
-    mSort_thou = quick_sort(newlist2, 0, medium-1, "Best")
+    mSort_thou = quick_sort(bestquick2, 0, medium-1, "Best")
     end = time.time()
     second = float(end - start)
     
     start = time.time()
-    mSort_tenthou = quick_sort(newlist3, 0, large-1, "Best")
+    mSort_tenthou = quick_sort(bestquick3, 0, large-1, "Best")
     end = time.time()
     third = end - start
     
@@ -443,6 +457,7 @@ def genBestQuick(small, medium, large):
 
     results(first, second, third, "Best")
     
+
     
 def genBestSelection(small, medium, large):
     newlist = []
@@ -539,7 +554,6 @@ def genAvgSelection(small, medium, large):
         return first
 
     results(first, second, third, "Average")
-
 
 
         
