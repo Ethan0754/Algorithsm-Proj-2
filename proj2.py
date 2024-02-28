@@ -626,34 +626,73 @@ def main():
                 print("What is the N? ")
                 chosenN = input()
                 chosenN = int(chosenN)
+                answer = 'Y'
+                
                 if choice == '1':
                     if algorithm == '1':
                         time = genBestBubble(chosenN, 100, 100)
                     elif algorithm == '2':
-                        time = genBestMerge(chosenN, 100, 100)
+                        if(chosenN>100000):
+                            print("Would you like to run this N? The algorithm is recursive and could cause an error with this large of an N (Y/N)")
+                            answer = input()
+                            if(answer == 'Y' or answer == 'y'):
+                                time = genBestMerge(chosenN, 100, 100)
+                            else:
+                                break
                     elif algorithm == '3':
-                        time = genBestQuick(chosenN, 100, 100)
+                        if(chosenN>100000):
+                            print("Would you like to run this N? The algorithm is recursive and could cause an error with this large of an N (Y/N)")
+                            answer = input()
+                            if(answer == 'Y' or answer == 'y'):
+                                time = genBestQuick(chosenN, 100, 100)
+                            else:
+                                break
                     elif algorithm == '4':
                         time = genBestSelection(chosenN, 100, 100)
                 elif choice == '2':
                     if algorithm == '1':
                         time = genAvgBubble(chosenN, 100, 100)
                     elif algorithm == '2':
-                        time = genAvgMerge(chosenN, 100, 100)
+                        if(chosenN>100000):
+                            print("Would you like to run this N? The algorithm is recursive and could cause an error with this large of an N (Y/N)")
+                            answer = input()
+                            if(answer == 'Y' or answer == 'y'):
+                                time = genAvgMerge(chosenN, 100, 100)
+                            else:
+                                break
                     elif algorithm == '3':
-                        time = genAvgQuick(chosenN, 100, 100)
+                        if(chosenN>100000):
+                            print("Would you like to run this N? The algorithm is recursive and could cause an error with this large of an N (Y/N)")
+                            answer = input()
+                            if(answer == 'Y' or answer == 'y'):
+                                time = genAvgQuick(chosenN, 100, 100)
+                            else:
+                                break
                     elif algorithm == '4':
                         time = genAvgSelection(chosenN, 100, 100)
                 elif choice == '3':
                     if algorithm == '1':
                         time = genWorstBubble(chosenN, 100, 100)
                     elif algorithm == '2':
-                        time = genWorstMerge(chosenN, 100, 100)
+                        if(chosenN>100000):
+                            print("Would you like to run this N? The algorithm is recursive and could cause an error with this large of an N (Y/N)")
+                            answer = input()
+                            if(answer == 'Y' or answer == 'y'):
+                                time = genWorstMerge(chosenN, 100, 100)
+                            else:
+                                break
                     elif algorithm == '3':
-                        time = genWorstQuick(chosenN, 100, 100)
+                        if(chosenN>100000):
+                            print("Would you like to run this N? The algorithm is recursive and could cause an error with this large of an N (Y/N)")
+                            answer = input()
+                            if(answer == 'Y' or answer == 'y'):
+                                time = genWorstQuick(chosenN, 100, 100)
+                            else:
+                                break
                     elif algorithm == '4':
                         time = genWorstSelection(chosenN, 100, 100)
-                print("For N = ", chosenN, ", it takes ", time, " seconds")
+                if(answer == 'Y' or answer == 'y'):
+                    print("For N = ", chosenN, ", it takes ", time, " seconds")
                 print("Do you want to input another N (Y/N)? ")    
                 again = input()
                 
